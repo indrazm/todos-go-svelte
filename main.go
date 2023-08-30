@@ -10,9 +10,12 @@ func main() {
 	app := fiber.New()
 	app.Use(cors.New())
 
-	app.Get("/", handlers.GetAllTask)
-	app.Post("/", handlers.AddTask)
-	app.Delete("/:id", handlers.DeleteTask)
+	app.Static("/", "./client/dist")
+	router := app.Group("/api/v1")
+
+	router.Get("/task", handlers.GetAllTask)
+	router.Post("/task", handlers.AddTask)
+	router.Delete("/task/:id", handlers.DeleteTask)
 
 	app.Listen(":8080")
 

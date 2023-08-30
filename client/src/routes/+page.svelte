@@ -3,7 +3,7 @@
 	let task = '';
 
 	const addTask = async () => {
-		const res = await fetch(`https://backend-go.fly.dev/`, {
+		const res = await fetch(`http://localhost:8080/api/v1/task`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -20,7 +20,7 @@
 	};
 
 	const deleteTask = async (id) => {
-		const res = await fetch(`https://backend-go.fly.dev/${id}`, {
+		const res = await fetch(`http://localhost:8080/api/v1/task/${id}`, {
 			method: 'DELETE'
 		});
 		const resData = await res.json();
@@ -28,22 +28,30 @@
 	};
 </script>
 
-<h1>Todo list</h1>
+<h1 class="text-2xl font-bold">Todo list</h1>
 
-<input type="text" placeholder="Add task" bind:value={task} />
-<button on:click={addTask}>Add task</button>
+<div class="flex items-center">
+	<input type="text" placeholder="Add task" bind:value={task} />
+	<button on:click={addTask}>Add task</button>
+</div>
 
-{#each data.data as item}
-	<div class="flex">
-		<p>{item.title}</p>
-		<button on:click={() => deleteTask(item.id)}>Delete</button>
-	</div>
-{/each}
+<div>
+	{#each data.data as item}
+		<div class="flex">
+			<p>{item.title}</p>
+			<button on:click={() => deleteTask(item.id)}>Delete</button>
+		</div>
+	{/each}
+</div>
 
-<style>
-	.flex {
-		display: flex;
-		gap: 4px;
-		align-items: center;
+<style lang="postcss">
+	:global(body) {
+		@apply bg-black text-slate-300;
+	}
+	:global(input) {
+		@apply w-auto py-2 px-3 rounded-lg bg-slate-800 text-slate-300;
+	}
+	:global(button) {
+		@apply w-fit py-2 px-3 bg-indigo-600 hover:bg-indigo-400 text-white rounded-lg font-medium;
 	}
 </style>
