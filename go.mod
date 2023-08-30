@@ -1,4 +1,4 @@
-module github.com/indrazm/todolist-go-sveltekit
+module todolist
 
 go 1.21.0
 
