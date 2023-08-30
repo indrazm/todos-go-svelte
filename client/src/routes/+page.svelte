@@ -3,7 +3,7 @@
 	let task = '';
 
 	const addTask = async () => {
-		const res = await fetch(`http://localhost:8080/`, {
+		const res = await fetch(`https://backend-go.fly.dev/`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -20,7 +20,7 @@
 	};
 
 	const deleteTask = async (id) => {
-		const res = await fetch(`http://localhost:8080/${id}`, {
+		const res = await fetch(`https://backend-go.fly.dev/${id}`, {
 			method: 'DELETE'
 		});
 		const resData = await res.json();
